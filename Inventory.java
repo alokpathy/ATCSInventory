@@ -2,8 +2,7 @@ import java.util.*;
 import java.io.*;
 
 public class Inventory {
-//	private ArrayList<InventoryItem> inventory = new ArrayList<InventoryItem>();
-//	private InventoryItem[] inventory;
+
 	private TreeMap<Integer, Integer> inventory;
 	public Inventory() {
 		//inventory = new InventoryItem[Integer.MAX_VALUE];
@@ -15,17 +14,6 @@ public class Inventory {
 			System.out.println("ERROR");
 			e.printStackTrace();
 		}
-		/*
-		try {
-			display();
-		} catch (IOException e) {
-			System.out.println("ERROR");
-			e.printStackTrace();
-		}
-		*/
-		long start = System.currentTimeMillis();
-		printMax();
-		System.out.println("Time: " + (System.currentTimeMillis() - start));
 	}
 
 	private void readFile() throws IOException {
@@ -54,8 +42,6 @@ public class Inventory {
 	}
 	
 	public void addNew(int id, int count){
-		//inventory[id].count = count;
-		//inventory[id].changePresent(true);
 		inventory.put(id, count);
 	}
 	public int findCount(int id){
@@ -63,7 +49,6 @@ public class Inventory {
 	}
 	
 	public void removeItem(int id) {
-		//inventory[id].changePresent(false);
 		inventory.remove(id);
 	}
 	
