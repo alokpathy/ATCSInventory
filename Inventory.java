@@ -10,10 +10,21 @@ import java.util.Map.Entry;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
+/**
+ * A representation of an inventory. Each item has an I.D number and a count number. 
+ * I.D numbers and count numbers are inputed via a text file, and the revised inventory is also 
+ * outputed on another text file.
+ * 
+ * @author Alok Tripathy, Cody Yang
+ *
+ */
 public class Inventory {
 
 	private TreeMap<Integer, Integer> inventory;
 	
+	/**
+	 * Creates Inventory and reads file as input upon initialization. 
+	 */
     public Inventory() {
 
     	inventory = new TreeMap<Integer, Integer>();
@@ -25,7 +36,11 @@ public class Inventory {
         }
      }
 
-        
+    /**
+     * Reads text file for I.D number and count number inputs.
+     * BufferedReader is used over FileReader and Scanner for efficiency purposes. 
+     * @throws IOException
+     */
     private void readFile() throws IOException {
                 
     	//BufferedReader in = new BufferedReader(new FileReader("C:\\MyStuff\\AndroidProgramming\\InventoryInput.txt"));
@@ -41,7 +56,10 @@ public class Inventory {
         
         in.close();
     }
-        
+    
+    /**
+     * Prints revised inventory onto a separate text file.
+     */
     public void display() {
     	
     	//PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("C:\\MyStuff\\AndroidProgramming\\InventoryOutput.txt")));
@@ -67,60 +85,67 @@ public class Inventory {
     	display();
     }
         
+    /**
+     * Adds new item to inventory.
+     * @param id      - I.D number for inventory item.
+     * @param count   - Count number for inventory item.
+     */
     public void addNew(int id, int count){
     	inventory.put(id, count);
     }
-        
+     
+    /**
+     * Edits an existing entry in inventory. 
+     * If the requested entry does not exist, a new one is created with the same I.D and count numbers.
+     * @param id       - I.D number for inventory item.
+     * @param count    - Count number for inventory item.
+     */
     public void edit(int id, int count){
     	inventory.put(id, count);
     }
         
+    /**
+     * Gets the count number for an existing entry.
+     * If the requested entry does not exist, the lowest integer is returned to indicate it.
+     * @param id       - I.D number for requested entry.
+     * @return         - Count number for I.D or smallest integer.
+     */
     public int findCount(int id){
-    	
-    	if(inventory.get(id) != null) {
-    		return inventory.get(id);
-    	}
-    	else {
-    		return Integer.MIN_VALUE;
-    	}
-    	
+    	return (inventory.get(id) != null ? inventory.get(id) : Integer.MIN_VALUE);
     }
-        
+    
+    /**
+     * Removes an existing entry.
+     * If the request entry does not exist, nothing happens.
+     * @param id       - I.D number for requested entry.
+     */
     public void removeItem(int id) {
     	if(inventory.get(id) != null) {
     		inventory.remove(id);
     	}
     }
-        
-    private int getCount(String myString){
-    	int index = myString.indexOf("=");
-        String count = myString.substring(index + 1);
-        return Integer.parseInt(count);
-    }
-        
-    private int getID(String myString){
-    	int index = myString.indexOf("=");
-        String id = myString.substring(0, index);
-        return Integer.parseInt(id);
-    }
-        
+    
+    /**
+     * Gets all items with highest count number.
+     * @return          - All inventory items with the highest count number.
+     */
     public ArrayList<InventoryItem> getMaxCountItems() {
                 
     	ArrayList<InventoryItem> items = new ArrayList<InventoryItem>();
     	int maxCount = 0;
         Iterator<Entry<Integer, Integer>> entries = inventory.entrySet().iterator();
         while(entries.hasNext()) {
-        	int count = getCount(entries.next().toString());
-            if(count > maxCount) {
+            int count = entries.next().getValue();
+        	if(count > maxCount) {
             	maxCount = count;
             }
         }
                 
         Iterator<Entry<Integer, Integer>> moarEntries = inventory.entrySet().iterator();
         while(moarEntries.hasNext()) {
-        	String entry = moarEntries.next().toString();
-        	int id = getID(entry);
-        	int count = getCount(entry);
+        	Entry<Integer, Integer> entry = moarEntries.next();
+        	int id = entry.getKey();
+        	int count = entry.getValue();
         	if(count == maxCount) {
         		items.add(new InventoryItem(id, count));
         	}

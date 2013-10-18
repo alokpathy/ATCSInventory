@@ -16,6 +16,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * GUI for Inventory.
+ * @author Alok Tripathy, Cody Yang.
+ *
+ */
 public class InventoryInterface {
 	
 	Inventory inventory = new Inventory();
@@ -35,6 +40,9 @@ public class InventoryInterface {
 	JTextField count1 = new JTextField(5);
 	JTextField count2 = new JTextField(5);
 	
+	/**
+	 * Constructs frame and adds all GUI to it.
+	 */
 	public InventoryInterface() {
 		
 		frame = new JFrame("Inventory");
@@ -123,6 +131,11 @@ public class InventoryInterface {
 		new InventoryInterface();
 	}
 
+	/**
+	 * Handles all button events.
+	 * @author Alok Tripathy, Cody Yang.
+	 *
+	 */
 	private class ActionHandler implements ActionListener {
 		
 		public void actionPerformed(ActionEvent e) {
@@ -180,6 +193,11 @@ public class InventoryInterface {
 		}
 	}
 	
+	/**
+	 * Handles all Combo-Box events.
+	 * @author Alok Tripathy, Cody Yang.
+	 *
+	 */
 	private class ItemHandler implements ItemListener {
 		
 		public void itemStateChanged(ItemEvent e) {			
