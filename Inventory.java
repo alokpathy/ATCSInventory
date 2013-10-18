@@ -1,5 +1,14 @@
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map.Entry;
+import java.util.StringTokenizer;
+import java.util.TreeMap;
 
 public class Inventory {
 
@@ -29,6 +38,8 @@ public class Inventory {
             String count = tokens.nextToken();
             inventory.put(Integer.parseInt(id), Integer.parseInt(count));
         }
+        
+        in.close();
     }
         
     public void display() {
@@ -38,7 +49,7 @@ public class Inventory {
     	
     		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("C:\\Users\\Tripathy\\Documents\\Eclipse\\ATCS\\ATCS\\src\\InventoryOutput.txt")));
     		out.println("Inventory ID=Count");
-    		Iterator entries = inventory.entrySet().iterator();
+    		Iterator<Entry<Integer, Integer>> entries = inventory.entrySet().iterator();
     		for(int i = 0; i < inventory.size(); i++) {
     			out.println(entries.next().toString());
     		}
@@ -51,27 +62,9 @@ public class Inventory {
     		e.printStackTrace();
     	}
     }
-        
-    //same thing as display()
-    public void update() {
-    
-    	//PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("C:\\MyStuff\\AndroidProgramming\\InventoryOutput.txt")));
-    	try {
-    		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("C:\\Users\\Tripathy\\Documents\\Eclipse\\ATCS\\ATCS\\src\\InventoryOutput.txt")));
 
-    		out.println("Inventory ID=Count");
-    		Iterator entries = inventory.entrySet().iterator();
-    		for(int i = 0; i < inventory.size(); i++) {
-    			out.println(entries.next().toString());
-    		}
-            
-    		out.flush();
-    		out.close();
-    	}
-    	catch(IOException e) {
-    		System.out.println("IO Error");
-    		e.printStackTrace();
-    	}
+    public void update() {
+    	display();
     }
         
     public void addNew(int id, int count){
@@ -94,7 +87,9 @@ public class Inventory {
     }
         
     public void removeItem(int id) {
-    	inventory.remove(id);
+    	if(inventory.get(id) != null) {
+    		inventory.remove(id);
+    	}
     }
         
     private int getCount(String myString){
@@ -109,10 +104,11 @@ public class Inventory {
         return Integer.parseInt(id);
     }
         
-    public void printMax() {
+    public ArrayList<InventoryItem> getMaxCountItems() {
                 
+    	ArrayList<InventoryItem> items = new ArrayList<InventoryItem>();
     	int maxCount = 0;
-        Iterator entries = inventory.entrySet().iterator();
+        Iterator<Entry<Integer, Integer>> entries = inventory.entrySet().iterator();
         while(entries.hasNext()) {
         	int count = getCount(entries.next().toString());
             if(count > maxCount) {
@@ -120,14 +116,16 @@ public class Inventory {
             }
         }
                 
-        Iterator moarEntries = inventory.entrySet().iterator();
+        Iterator<Entry<Integer, Integer>> moarEntries = inventory.entrySet().iterator();
         while(moarEntries.hasNext()) {
         	String entry = moarEntries.next().toString();
         	int id = getID(entry);
         	int count = getCount(entry);
         	if(count == maxCount) {
-        		System.out.println("ID: " + id + " Count: " + count);
+        		items.add(new InventoryItem(id, count));
         	}
         }
+        
+        return items;
     }
 }

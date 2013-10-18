@@ -1,7 +1,20 @@
-import java.awt.*;
-import javax.swing.*;
-import java.awt.event.*;
-import java.io.IOException;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class InventoryInterface {
 	
@@ -146,8 +159,18 @@ public class InventoryInterface {
 			}
 			
 			else if(e.getSource() == findMax){
-				inventory.printMax();
-				//display stuff
+				ArrayList<InventoryItem> maxItems = inventory.getMaxCountItems();
+				StringBuilder builder = new StringBuilder();
+				for(int i = 0; i < maxItems.size(); i++) {
+					builder.append("ID: " + maxItems.get(i).getItemID() + "\nCount: " + maxItems.get(i).getItemCount() + "\n\n");
+				}
+				
+				if(maxItems.size() == 0) {
+					JOptionPane.showMessageDialog(frame, "No items");
+				}
+				else {
+					JOptionPane.showMessageDialog(frame, builder.toString());
+				}
 			}
 			
 			else if(e.getSource() == display){
