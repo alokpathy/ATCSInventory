@@ -23,22 +23,11 @@ import javax.swing.JTextField;
  */
 public class InventoryInterface {
 	
-	Inventory inventory = new Inventory();
-	JFrame frame;
-	JPanel cards;
-	JButton add = new JButton("ADD");
-	JButton remove = new JButton("REMOVE");
-	JButton edit = new JButton("EDIT");
-	JButton find = new JButton("FIND");
-	JButton findMax = new JButton("FINDMAX");
-	JButton display = new JButton("DISPLAY");
-	
-	JTextField five1 = new JTextField(5);
-	JTextField five2 = new JTextField(5);
-	JTextField ten1 = new JTextField(10);
-	JTextField ten2 = new JTextField(10);
-	JTextField count1 = new JTextField(5);
-	JTextField count2 = new JTextField(5);
+	private Inventory inventory;
+	private JFrame frame;
+	private JPanel cards;	
+	private JButton add, remove, edit, find, findMax, display;
+	private JTextField five1, five2, ten1, ten2, count1, count2;
 	
 	/**
 	 * Constructs frame and adds all GUI to it.
@@ -46,6 +35,21 @@ public class InventoryInterface {
 	public InventoryInterface() {
 		
 		frame = new JFrame("Inventory");
+		inventory = new Inventory();
+		
+		add = new JButton("ADD");
+		remove = new JButton("REMOVE");
+		edit = new JButton("EDIT");
+		find = new JButton("FIND");
+		findMax = new JButton("FINDMAX");
+		display = new JButton("DISPLAY");
+		
+		five1 = new JTextField(5);
+		five2 = new JTextField(5);
+		ten1 = new JTextField(10);
+		ten2 = new JTextField(10);
+		count1 = new JTextField(5);
+		count2 = new JTextField(5);
 		
 		final String ADD = "Add Item";
 		final String REMOVE = "Remove Item";
