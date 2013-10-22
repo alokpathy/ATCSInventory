@@ -15,11 +15,11 @@ public class InventoryTester {
         public InventoryTester() throws IOException{
                 
                 //BufferedReader in = new BufferedReader(new FileReader("H:\\ATCompSci\\InventoryOutput.txt"));
+                //PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("H:\\Eclipse\\Sorts\\src\\InventoryInput.txt")));
                 PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("C:\\Users\\Tripathy\\Documents\\Eclipse\\ATCS\\ATCS\\src\\InventoryInput.txt")));
                 
-                
                 Random rand = new Random();
-                for(int i = 0; i < 10; i++) {
+                for(int i = 0; i < 1000000; i++) {
                         out.println(rand.nextInt(99999) + " " + rand.nextInt(99999));
                 }
                 

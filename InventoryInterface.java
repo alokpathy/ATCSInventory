@@ -149,12 +149,16 @@ public class InventoryInterface {
 				int newCount = Integer.parseInt(count1.getText());
 				inventory.addNew(newID, newCount);
 				inventory.update();
+				JOptionPane.showMessageDialog(frame, "Item Added",
+						"Information", JOptionPane.INFORMATION_MESSAGE);
 			}
 			
 			else if(e.getSource() == remove){
 				int id = Integer.parseInt(ten1.getText());
 				inventory.removeItem(id);
 				inventory.update();
+				JOptionPane.showMessageDialog(frame, "Item Removed",
+						"Information", JOptionPane.INFORMATION_MESSAGE);
 			}
 			
 			else if(e.getSource() == edit){
@@ -162,6 +166,8 @@ public class InventoryInterface {
 				int newCount = Integer.parseInt(count2.getText());
 				inventory.edit(newID, newCount);	
 				inventory.update();
+				JOptionPane.showMessageDialog(frame, "Item Edited",
+						"Information", JOptionPane.INFORMATION_MESSAGE);
 			}
 			
 			else if(e.getSource() == find){

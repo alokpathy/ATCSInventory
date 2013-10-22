@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map.Entry;
+import java.lang.StringBuilder;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
@@ -19,7 +20,7 @@ import java.util.TreeMap;
  *
  */
 public class Inventory {
-
+	
 	private TreeMap<Integer, Integer> inventory;
 	
 	/**
@@ -44,8 +45,8 @@ public class Inventory {
     private void readFile() throws IOException {
                 
     	//BufferedReader in = new BufferedReader(new FileReader("C:\\MyStuff\\AndroidProgramming\\InventoryInput.txt"));
+        //BufferedReader in = new BufferedReader(new FileReader("H:\\Eclipse\\Sorts\\src\\InventoryInput.txt"));
         BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\Tripathy\\Documents\\Eclipse\\ATCS\\ATCS\\src\\InventoryInput.txt"));
-        
     	String sCurrentLine = "";
         while((sCurrentLine = in.readLine()) != null) {
         	StringTokenizer tokens = new StringTokenizer(sCurrentLine);
@@ -60,16 +61,18 @@ public class Inventory {
     /**
      * Prints revised inventory onto a separate text file.
      */
-    public void display() {
-    	
+    public String display() {
+    	StringBuilder builder = new StringBuilder();
     	//PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("C:\\MyStuff\\AndroidProgramming\\InventoryOutput.txt")));
     	try {
-    	
     		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("C:\\Users\\Tripathy\\Documents\\Eclipse\\ATCS\\ATCS\\src\\InventoryOutput.txt")));
+    		//PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("H:\\Eclipse\\Sorts\\src\\InventoryOutput.txt")));
     		out.println("Inventory ID=Count");
     		Iterator<Entry<Integer, Integer>> entries = inventory.entrySet().iterator();
     		for(int i = 0; i < inventory.size(); i++) {
-    			out.println(entries.next().toString());
+    			String item = entries.next().toString();
+    			builder.append("\n" + item);
+    			out.println(item);
     		}
                 
     		out.flush();
@@ -79,6 +82,7 @@ public class Inventory {
     		System.out.println("IO Error");
     		e.printStackTrace();
     	}
+    	return builder.toString();
     }
 
     public void update() {
